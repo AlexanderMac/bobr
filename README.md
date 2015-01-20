@@ -26,7 +26,7 @@ npm i -D bobr
 
 `bobr` should be used in task runners, such as Gulp or Grunt. Below, the example of gulp task which run `bobr`:
 ```js
-var gulp       = require('gulp);
+var gulp       = require('gulp');
 var bobr       = require('bobr');
 var browserify = require('browserify');
 
