@@ -2,7 +2,18 @@
 
 Update `browser` property in `package.json` for use [bower](https://github.com/bower/bower) components in [browserify](https://github.com/substack/node-browserify) by their names.
 
-Currently, browserify can resolves paths only packages installed via `npm`, to use components installed via `bower`, you should manually update `browser` property in `package.json`, or use relative paths in `require()`. Or you can use `bobr`, which will automaticly update `browser` property in `package.json`. 
+Currently, browserify can resolves paths only packages installed via `npm`, to use components installed via `bower`, you should manually update `browser` property in `package.json`, or use relative paths in `require()`. `bobr` updates `browser` property in `package.json`, allows you use `bower` modules by name `require()`.
+
+```js
+// package.json
+browser: [ // updated by bobr
+  "jquery": "./bower_components/jquery/dist/jquery.js",
+  ...
+]
+
+// in your module
+var $ = require('jquery');
+```
 
 ## Installation
 
@@ -13,12 +24,21 @@ npm i -D bobr
 
 ## Usage
 
-`bobr` should be used in task runners, such as Gulp or Grant. Below, the example of gulp task which run `bobr`:
-``` js
-var gulp = require('gulp);
-var bobr = require('bobr');
+`bobr` should be used in task runners, such as Gulp or Grunt. Below, the example of gulp task which run `bobr`:
+```js
+var gulp       = require('gulp);
+var bobr       = require('bobr');
+var browserify = require('browserify');
 
-bobr.run(options);
+// Update browser property
+gulp.task('bobr', function() {
+  bobr.run(options);
+});
+
+// Browserify modules, will be run, after bobr will be finished
+gulp.task('browserify', ['bobr'], function(cb) {
+  // create bundles
+}
 ```
 
 
