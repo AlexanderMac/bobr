@@ -8,6 +8,7 @@ module.exports = function(options) {
   
   var cwd = process.cwd();
   var browser = {};
+  var modules = [];
   
   _(mainBowerFiles('**/*.js'))
     .map(function(modulePath) {
@@ -18,11 +19,12 @@ module.exports = function(options) {
         modPath: modPath
       };
     })
-    .sortBy(function(module) {
-      return module.modName;
+    .sortBy(function(mod) {
+      return mod.modName;
     })
-    .each(function(module) {
-      browser[module.modName] = module.modPath;
+    .each(function(mod) {
+      modules.push(mod.modName);
+      browser[mod.modName] = mod.modPath;
     });
     
   if (options.browserExternalFile) {
@@ -32,7 +34,9 @@ module.exports = function(options) {
   
   var pkg = jsonfile.readFileSync('./package.json');
   pkg.browser = browser;
-  jsonfile.writeFileSync(paths.pkg, './package.json');
+  jsonfile.writeFileSync('./package.json', pkg);
+  
+  return modules;
 }
 
 function _fixName(modName, replaces) {
