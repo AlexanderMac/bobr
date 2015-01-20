@@ -16,14 +16,12 @@ var $ = require('jquery');
 ```
 
 ## Install
-
 ```
 npm i -D bobr
 ```
 
 
 ## Usage
-
 Bobr should be used in task runners, such as Gulp or Grunt. Below, the example of gulp task which run Bobr:
 ```js
 var gulp       = require('gulp');
@@ -42,8 +40,7 @@ gulp.task('browserify', ['bobr'], function(cb) {
 ```
 
 
-# Options
-
+## Options
 * `bowerConfig` - a path to bower configuration file, default is `./bower.json`.
 * `browserExternalFile` - a path to a file with your own modules, concatenates with result bower modules, after run bobr.
 
