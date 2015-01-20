@@ -1,6 +1,6 @@
 {
   "name": "bobr",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Update browser property in package.json for use bower components in browserify by their names.",
   "keywords": [
     "browserify",
