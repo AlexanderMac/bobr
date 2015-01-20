@@ -8,43 +8,48 @@ module.exports = function(options) {
   
   var cwd = process.cwd();
   var browser = {};
-  var modules = [];
   
   _(mainBowerFiles('**/*.js'))
-    .map(function(modulePath) {
-      var modName = _fixName(path.basename(modulePath, '.js'), options.replaces); // TODO: use module real name
-      var modPath = '.' + modulePath.replace(cwd, '');
+    .map(function(modFullPath) {
+      var modBaseName = path.basename(modFullPath, '.js');
+      var modName = _overrideName(modBaseName, options.overrides);
+      var modRelativePath = '.' + modFullPath.replace(cwd, '');
       return {
         modName: modName,
-        modPath: modPath
+        modPath: modRelativePath
       };
     })
     .sortBy(function(mod) {
       return mod.modName;
     })
     .each(function(mod) {
-      modules.push(mod.modName);
       browser[mod.modName] = mod.modPath;
     });
     
   if (options.browserExternalFile) {
-    var browserExternal = jsonfile.readFileSync(options.browserExternalFile);
-    browser = _.assign(browser, browserExternal.browser);
+    browser = _addExternalModules(browser, options.browserExternalFile);
   }
   
-  var pkg = jsonfile.readFileSync('./package.json');
-  pkg.browser = browser;
-  jsonfile.writeFileSync('./package.json', pkg);
+  _updatePackageFile(browser);
   
-  return modules;
+  return _.keys(browser);
+};
+
+function _overrideName(modName, overrides) {
+  var obj = _.find(overrides, function(ov) {
+    return ov.name === modName;
+  });
+  
+  return obj ? obj.newName : modName;
 }
 
-function _fixName(modName, replaces) {
-  var obj = _.find(replaces, function(rep) {
-    return rep.name === modName;
-  });
-  if (obj) {
-    return obj.repName;
-  }
-  return modName;
+function _addExternalModules(browser, browserExternalFile) {
+  var browserExternal = jsonfile.readFileSync(browserExternalFile);
+  return _.assign(browser, browserExternal.browser);
+}
+
+function _updatePackageFile(browser) {
+  var pkgConf = jsonfile.readFileSync('./package.json');
+  pkgConf.browser = browser;
+  jsonfile.writeFileSync('./package.json', pkgConf);
 }
