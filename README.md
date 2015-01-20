@@ -30,7 +30,15 @@ var browserify = require('browserify');
 
 // Update browser property
 gulp.task('bobr', function() {
-  bobr.run(options);
+  bobr.run({
+    overrides: [
+      {
+        name: 'jquery'
+        newName: 'jqueryModule'
+      }
+    ],
+    browserExternalFile: './config/browser-external.json',
+  });
 });
 
 // Browserify modules, will be run, after bobr will be finished
@@ -41,8 +49,8 @@ gulp.task('browserify', ['bobr'], function(cb) {
 
 
 ## Options
-* `bowerConfig` - a path to bower configuration file, default is `./bower.json`.
-* `browserExternalFile` - a path to a file with your own modules, concatenates with result bower modules, after run bobr.
+* `overrides` - an array of objects to override module names. By default, module name is a js file name without extension, use this option to override this.
+* `browserExternalFile` - a path to a json file with your own modules, which you want to browserify. Bobr concatenate these modules with bower modules.
 
 
 ## License
