@@ -2,7 +2,7 @@
 
 Update `browser` property in `package.json` for use [bower](https://github.com/bower/bower) components in [browserify](https://github.com/substack/node-browserify) by their names.
 
-Currently, browserify can resolves paths only packages installed via `npm`, to use components installed via `bower`, you should manually update `browser` property in `package.json`, or use relative paths in `require()`. `bobr` updates `browser` property in `package.json`, allows you use `bower` modules by name in `require()`.
+Currently, browserify can resolves paths only packages installed via `npm`, to use components installed via bower, you should manually update `browser` property in `package.json`, or use relative paths in `require()`. Bobr updates `browser` property in `package.json`, allows you use bower modules by name in `require()`.
 
 ```js
 // package.json
@@ -15,7 +15,7 @@ browser: [ // updated by bobr
 var $ = require('jquery');
 ```
 
-## Installation
+## Install
 
 ```
 npm i -D bobr
@@ -24,7 +24,7 @@ npm i -D bobr
 
 ## Usage
 
-`bobr` should be used in task runners, such as Gulp or Grunt. Below, the example of gulp task which run `bobr`:
+Bobr should be used in task runners, such as Gulp or Grunt. Below, the example of gulp task which run Bobr:
 ```js
 var gulp       = require('gulp');
 var bobr       = require('bobr');
@@ -44,8 +44,8 @@ gulp.task('browserify', ['bobr'], function(cb) {
 
 # Options
 
-* bowerConfig - a path to `bower` configuration file, default is `./bower.json`.
-* browserExternalFile - a path to a file with your own modules, concatenates with result `bower` modules, after run `bobr`.
+* `bowerConfig` - a path to bower configuration file, default is `./bower.json`.
+* `browserExternalFile` - a path to a file with your own modules, concatenates with result bower modules, after run bobr.
 
 
 ## License
