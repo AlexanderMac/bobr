@@ -4,7 +4,7 @@ var path           = require('path');
 var jsonfile       = require('jsonfile');
 
 module.exports = function(options) {
-  options.replaces = options.replaces || [];
+  options.overrides = options.overrides || [];
   
   var cwd = process.cwd();
   var browser = {};
