@@ -1,0 +1,32 @@
+{
+  "name": "bobr",
+  "version": "0.0.1",
+  "description": "Update browser property in package.json for use bower components in browserify by their names.",
+  "keywords": [
+    "browserify",
+    "bower",
+    "component"
+  ],
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AlexanderMac/bobr"
+  },
+  "author": {
+    "name": "AlexanderMac",
+    "email": "amatsibarov@gmail.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AlexanderMac/bobr/issues"
+  },
+  "homepage": "https://github.com/AlexanderMac/bobr",
+  "dependencies": {
+    "jsonfile": "^2.0.0",
+    "lodash": "^2.4.1",
+    "main-bower-files": "^2.5.0"
+  }
+}
