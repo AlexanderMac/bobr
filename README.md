@@ -2,7 +2,7 @@
 
 Update `browser` property in `package.json` for use [bower](https://github.com/bower/bower) components in [browserify](https://github.com/substack/node-browserify) by their names.
 
-Currently, browserify can resolves paths only packages installed via `npm`, to use components installed via `bower`, you should manually update `browser` property in `package.json`, or use relative paths in `require()`. `bobr` updates `browser` property in `package.json`, allows you use `bower` modules by name `require()`.
+Currently, browserify can resolves paths only packages installed via `npm`, to use components installed via `bower`, you should manually update `browser` property in `package.json`, or use relative paths in `require()`. `bobr` updates `browser` property in `package.json`, allows you use `bower` modules by name in `require()`.
 
 ```js
 // package.json
